@@ -8,7 +8,7 @@ import { HistoryComponent } from './history/history.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-@NgModule({
+@NgModule({ 
   declarations: [
     AppComponent,
     ExchangeComponent,

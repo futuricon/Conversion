@@ -8,7 +8,7 @@ import { FormGroup, FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-history',
-  templateUrl: './history.component.html'
+  templateUrl: './history.component.html' 
 })
 export class HistoryComponent implements OnInit {
  

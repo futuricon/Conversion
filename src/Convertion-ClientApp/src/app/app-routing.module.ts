@@ -5,7 +5,7 @@ import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/exchange', pathMatch: 'full' },
-  { path: 'exchange', component: ExchangeComponent },
+  { path: 'exchange', component: ExchangeComponent }, 
   { path: 'history', component: HistoryComponent }
 ];
 

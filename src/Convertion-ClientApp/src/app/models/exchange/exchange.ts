@@ -5,6 +5,6 @@ export interface Exchange {
     incomeAmount: number;
     outcomeAmount: number;
     date?: Date;
-    fromCurrency?: Currency;
+    fromCurrency?: Currency; 
     toCurrency?: Currency;
 }

@@ -8,7 +8,7 @@ export interface Currency {
       ccyNm_UZC: string;
       ccyNm_EN: string;
       nominal: number;
-      rate: number;
+      rate: number; 
       diff: number;
       date: Date;
 }

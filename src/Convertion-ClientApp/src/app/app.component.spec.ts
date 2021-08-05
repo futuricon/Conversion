@@ -8,7 +8,7 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule
       ],
-      declarations: [
+      declarations: [ 
         AppComponent
       ],
     }).compileComponents();

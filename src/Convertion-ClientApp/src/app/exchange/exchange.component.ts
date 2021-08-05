@@ -6,7 +6,7 @@ import { Exchange } from '../models/exchange/exchange';
 
 @Component({
   selector: 'app-exchange',
-  templateUrl: './exchange.component.html',
+  templateUrl: './exchange.component.html', 
 })
 
 export class ExchangeComponent implements OnInit {
