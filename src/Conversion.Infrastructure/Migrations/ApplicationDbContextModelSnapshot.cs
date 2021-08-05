@@ -43,7 +43,7 @@ namespace Conversion.Infrastructure.Migrations
                     b.Property<int>("Code")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Diff")
@@ -69,11 +69,11 @@ namespace Conversion.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("FromCurrencyCurrencyId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("IncomeAmount")
                         .HasColumnType("decimal(18,2)");
@@ -81,34 +81,31 @@ namespace Conversion.Infrastructure.Migrations
                     b.Property<decimal>("OutcomeAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid?>("SourceCurrencyCurrencyId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("TargetCurrencyCurrencyId")
+                    b.Property<Guid?>("ToCurrencyCurrencyId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ExchangeId");
 
-                    b.HasIndex("SourceCurrencyCurrencyId");
+                    b.HasIndex("FromCurrencyCurrencyId");
 
-                    b.HasIndex("TargetCurrencyCurrencyId");
+                    b.HasIndex("ToCurrencyCurrencyId");
 
                     b.ToTable("Exchanges");
                 });
 
             modelBuilder.Entity("Conversion.Domain.Entities.Exchange", b =>
                 {
-                    b.HasOne("Conversion.Domain.Entities.Currency", "SourceCurrency")
+                    b.HasOne("Conversion.Domain.Entities.Currency", "FromCurrency")
                         .WithMany()
-                        .HasForeignKey("SourceCurrencyCurrencyId");
+                        .HasForeignKey("FromCurrencyCurrencyId");
 
-                    b.HasOne("Conversion.Domain.Entities.Currency", "TargetCurrency")
+                    b.HasOne("Conversion.Domain.Entities.Currency", "ToCurrency")
                         .WithMany()
-                        .HasForeignKey("TargetCurrencyCurrencyId");
+                        .HasForeignKey("ToCurrencyCurrencyId");
 
-                    b.Navigation("SourceCurrency");
+                    b.Navigation("FromCurrency");
 
-                    b.Navigation("TargetCurrency");
+                    b.Navigation("ToCurrency");
                 });
 #pragma warning restore 612, 618
         }

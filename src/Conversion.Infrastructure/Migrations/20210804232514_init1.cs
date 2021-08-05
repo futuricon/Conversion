@@ -22,7 +22,7 @@ namespace Conversion.Infrastructure.Migrations
                     Nominal = table.Column<int>(type: "int", nullable: false),
                     Rate = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Diff = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -34,39 +34,38 @@ namespace Conversion.Infrastructure.Migrations
                 columns: table => new
                 {
                     ExchangeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Id = table.Column<int>(type: "int", nullable: false),
                     IncomeAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     OutcomeAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    SourceCurrencyCurrencyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    TargetCurrencyCurrencyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FromCurrencyCurrencyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ToCurrencyCurrencyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Exchanges", x => x.ExchangeId);
                     table.ForeignKey(
-                        name: "FK_Exchanges_Сurrencies_SourceCurrencyCurrencyId",
-                        column: x => x.SourceCurrencyCurrencyId,
+                        name: "FK_Exchanges_Сurrencies_FromCurrencyCurrencyId",
+                        column: x => x.FromCurrencyCurrencyId,
                         principalTable: "Сurrencies",
                         principalColumn: "CurrencyId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Exchanges_Сurrencies_TargetCurrencyCurrencyId",
-                        column: x => x.TargetCurrencyCurrencyId,
+                        name: "FK_Exchanges_Сurrencies_ToCurrencyCurrencyId",
+                        column: x => x.ToCurrencyCurrencyId,
                         principalTable: "Сurrencies",
                         principalColumn: "CurrencyId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exchanges_SourceCurrencyCurrencyId",
+                name: "IX_Exchanges_FromCurrencyCurrencyId",
                 table: "Exchanges",
-                column: "SourceCurrencyCurrencyId");
+                column: "FromCurrencyCurrencyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Exchanges_TargetCurrencyCurrencyId",
+                name: "IX_Exchanges_ToCurrencyCurrencyId",
                 table: "Exchanges",
-                column: "TargetCurrencyCurrencyId");
+                column: "ToCurrencyCurrencyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

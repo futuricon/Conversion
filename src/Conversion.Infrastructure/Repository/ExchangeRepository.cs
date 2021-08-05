@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Conversion.Infrastructure.Repository
@@ -32,9 +33,25 @@ namespace Conversion.Infrastructure.Repository
             }
         }
 
-        public Task<bool> AddExchange(Exchange exchange)
+        public async Task<bool> AddExchange(Exchange exchange)
         {
-            throw new NotImplementedException();
+            await dbSet.AddAsync(exchange);
+            return true;
+        }
+
+        public async Task<IEnumerable<Exchange>> GetSortedExchange(History history)
+        {
+            try
+            {
+                return await dbSet.Where(
+                    x=>x.Date.Date == history.Date.Date && x.FromCurrency.Code == history.FromCode && x.ToCurrency.Code == history.ToCode)
+                    .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "{Repo} Get Sorted Exchange method error", typeof(ExchangeRepository));
+                return new List<Exchange>();
+            }
         }
     }
 }

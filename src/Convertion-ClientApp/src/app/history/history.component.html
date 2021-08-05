@@ -1,0 +1,64 @@
+<style>
+    button.calendar,
+    button.calendar:active {
+        width: 2.75rem;
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAcCAYAAAAEN20fAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAEUSURBVEiJ7ZQxToVAEIY/YCHGxN6XGOIpnpaEsBSeQC9ArZbm9TZ6ADyBNzAhQGGl8Riv4BLAWAgmkpBYkH1b8FWT2WK/zJ8ZJ4qiI6XUI3ANnGKWBnht2/ZBDRK3hgVGNsCd7/ui+JkEIrKtqurLpEWaphd933+IyI3LEIdpCYCiKD6HcuOa/nwOa0ScJEnk0BJg0UTUWJRl6RxCYEzEmomsIlPU3IPW+grIAbquy+q6fluy/28RIBeRMwDXdXMgXLj/B2uimRXpui4D9sBeRLKl+1N+L+t6RwbWrZliTTTr1oxYtzVWiTQAcRxvTX+eJMnlUDaO1vpZRO5NS0x48sIwfPc87xg4B04MCzQi8hIEwe4bl1DnFMCN2zsAAAAASUVORK5CYII=") !important;
+        background-repeat: no-repeat;
+        background-size: 23px;
+        background-position: 50%;
+    }
+</style>
+
+<h1 class="text-center my-5">История</h1>
+
+<div class="row mb-3">
+    <div class="col-3">
+        <form class="form-inline">
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" placeholder="dd.mm.yyyy" name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+                    <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <form class="row col-9" [formGroup]="form" (ngSubmit)="onSearch()">
+        <div class="col-4">
+            <select formControlName="fromCurrency" class="form-select" [(ngModel)]="inDefaultValue">
+                <option *ngFor="let item of currencies" value="{{item.code}}">{{item.ccyNm_RU}}</option>
+            </select>
+        </div>
+        <div class="col-4">
+            <select formControlName="toCurrency" class="form-select" [(ngModel)]="outDefaultValue">
+                <option *ngFor="let item of currencies" value="{{item.code}}">{{item.ccyNm_RU}}</option>
+            </select>
+        </div>
+        <div class="col-4">
+            <button (click)="onSearch()" class="btn btn-secondary" type="submit">Поиск</button>
+        </div>
+    </form>
+
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Исходная Валюта</th>
+            <th scope="col">Целевая Валюта</th>
+            <th scope="col">Исходная Сумма</th>
+            <th scope="col">Получаемая Сумма</th>
+            <th scope="col">Дата</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of exchange">
+            <td>{{ item.fromCurrency!.ccyNm_RU}}</td>
+            <td>{{ item.toCurrency!.ccyNm_RU}}</td>
+            <td>{{ item.incomeAmount | number: '1.1-2' }}</td>
+            <td>{{ item.outcomeAmount | number: '1.1-2' }}</td>
+            <td>{{ item.date | date }}</td>
+        </tr>
+    </tbody>
+</table>
+<script>
+    $('.input-group.date').datepicker({});
+</script>

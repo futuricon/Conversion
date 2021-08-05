@@ -29,6 +29,6 @@ namespace Conversion.Domain.Entities
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
     }
 }

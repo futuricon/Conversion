@@ -10,5 +10,7 @@ namespace Conversion.Infrastructure.Data
 
         public virtual DbSet<Currency> Сurrencies { get; set; }
         public virtual DbSet<Exchange> Exchanges { get; set; }
+
+
     }
 }

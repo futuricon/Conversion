@@ -1,0 +1,42 @@
+<div class="col-lg-6 mx-auto mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center my-5">Конвертер</h1>
+        </div>
+        <form class="row" [formGroup]="form" (ngSubmit)="submit()">
+            <div class="col-lg-6 col-md-6 my-4">
+                <div class="row">
+                    <div class="col-12">
+                        <select (change)="changeCurrency($event)" formControlName="inCurrency" class="form-select" [(ngModel)]="inDefaultValue">
+                            <option *ngFor="let item of currencies" value="{{item.code}}">{{item.ccyNm_RU}}</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <div class="input-group my-3">
+                            <input formControlName="inAmount" [(ngModel)]="inAmountDefaulValue" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 my-4">
+                <div class="row">
+                    <div class="col-12">
+                        <select (change)="changeCurrency($event)" formControlName="outCurrency" class="form-select" [(ngModel)]="outDefaultValue">
+                            <option *ngFor="let item of currencies" value="{{item.code}}">{{item.ccyNm_RU}}</option>
+                        </select>
+                    </div>
+                    <div class="col-12">
+                        <div class="input-group my-3">
+                            <input value="{{ outAmountDefaulValue | number : '1.1-2' }}" formControlName="outAmount" [(ngModel)]="outAmountDefaulValue" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="d-grid col-lg-4 col-md-6 mx-auto">
+                    <button class="btn btn-primary" type="submit">Конвертировать</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

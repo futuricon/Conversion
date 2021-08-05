@@ -12,7 +12,6 @@ namespace Conversion.Domain.Entities
         }
         [Key]
         public Guid ExchangeId { get; set; }
-        public int Id { get; set; }
 
         [Column(TypeName = "decimal(18, 2)")]
         public decimal IncomeAmount { get; set; }
@@ -22,8 +21,8 @@ namespace Conversion.Domain.Entities
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd.MM.yyyy}")]
-        public DateTime? Date { get; set; }
-        public Currency SourceCurrency { get; set; }
-        public Currency TargetCurrency { get; set; }
+        public DateTime Date { get; set; }
+        public virtual Currency FromCurrency { get; set; }
+        public virtual Currency ToCurrency { get; set; }
     }
 }
